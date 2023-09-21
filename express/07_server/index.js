@@ -3,25 +3,26 @@ const express = require('express')
 const app = express();
 const path = require('path')
 const methodOverride = require('method-override')
+const { v4: uuid } = require('uuid')
 
 let comments = [
     {
-        id: 0,
+        id: uuid(),
         username: "Manoj Tiwari",
         comment: "ladkfnaksdjnfdnfosdafnkadjsnfjksdbfkjdsbfkjdsbfgfuidsbfiudbfiu"
     },
     {
-        id: 1,
+        id: uuid(),
         username: "Monu Bhaiya",
         comment: "ladkfnaksdjnfdnfosdafnkadjsnfjksdbfkjdsbfkjdsbfgfuidsbfiudbfiu"
     },
     {
-        id: 2,
+        id: uuid(),
         username: "Ravi Kishan",
         comment: "ladkfnaksdjnfdnfosdafnkadjsnfjksdbfkjdsbfkjdsbfgfuidsbfiudbfiu"
     },
     {
-        id: 3,
+        id: uuid(),
         username: "Aryan Mafia",
         comment: "ladkfnaksdjnfdnfosdafnkadjsnfjksdbfkjdsbfkjdsbfgfuidsbfiudbfiu"
     }
@@ -50,9 +51,8 @@ app.get('/comments/new', (req, res) => {
 
 app.post('/comments', (req, res) => {
     const { username, comment } = req.body;
-    let i = comments[comments.length - 1].id;
     comments.push({
-        id: i + 1,
+        id: uuid(),
         username,
         comment
     })
@@ -79,6 +79,14 @@ app.patch('/comments/:commentId', async (req, res) => {
     comm.comment = comment;
 
     res.redirect('/comments');
+})
+
+app.delete('/comments/:commentId', async (req, res) => {
+    const { commentId } = req.params;
+    const newArray = await comments.filter((item) => { return item.id != commentId })
+    // console.log(newArray);
+    comments = newArray;
+    res.redirect('/comments')
 })
 
 app.listen(8888, () => {
