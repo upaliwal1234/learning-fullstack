@@ -74,9 +74,8 @@ app.get('/comments/:commentId/edit', async (req, res) => {
 
 app.patch('/comments/:commentId', async (req, res) => {
     const { commentId } = req.params;
-    const { username, comment } = req.body;
+    const { comment } = req.body;
     const comm = await comments.find((item) => { return item.id == commentId })
-    comm.username = username;
     comm.comment = comment;
 
     res.redirect('/comments');
