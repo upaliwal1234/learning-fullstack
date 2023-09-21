@@ -56,6 +56,6 @@ app.post('/comments', (req, res) => {
     res.redirect('/comments')
 })
 
-app.listen(8080, () => {
-    console.log('server is up and running at PORT', 8080);
+app.listen(8888, () => {
+    console.log('server is up and running at PORT', 8888);
 })
