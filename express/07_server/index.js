@@ -56,6 +56,13 @@ app.post('/comments', (req, res) => {
     res.redirect('/comments')
 })
 
+app.get('/comments/:commentId', async (req, res) => {
+    const { commentId } = req.params;
+    const comment = await comments.find((item) => { return item.id == commentId });
+    // console.log(comment);
+    res.render('comment', { comment });
+})
+
 app.listen(8888, () => {
     console.log('server is up and running at PORT', 8888);
 })
