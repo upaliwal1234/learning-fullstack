@@ -2,6 +2,7 @@ const exp = require('constants');
 const express = require('express')
 const app = express();
 const path = require('path')
+const methodOverride = require('method-override')
 
 let comments = [
     {
@@ -32,9 +33,11 @@ app.set('views', path.join(__dirname, 'views'))
 // app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing form data
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(methodOverride('_method'))
 
 app.get('/', (req, res) => {
-    res.send('You are at root path')
+    // res.send('You are at root path')
+    res.redirect('/comments')
 })
 
 app.get('/comments', (req, res) => {
@@ -61,6 +64,22 @@ app.get('/comments/:commentId', async (req, res) => {
     const comment = await comments.find((item) => { return item.id == commentId });
     // console.log(comment);
     res.render('comment', { comment });
+})
+
+app.get('/comments/:commentId/edit', async (req, res) => {
+    const { commentId } = req.params;
+    const comment = await comments.find((item) => { return item.id == commentId });
+    res.render('edit', { comment });
+})
+
+app.patch('/comments/:commentId', async (req, res) => {
+    const { commentId } = req.params;
+    const { username, comment } = req.body;
+    const comm = await comments.find((item) => { return item.id == commentId })
+    comm.username = username;
+    comm.comment = comment;
+
+    res.redirect('/comments');
 })
 
 app.listen(8888, () => {

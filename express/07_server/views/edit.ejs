@@ -9,15 +9,16 @@
 </head>
 
 <body>
-    <h1>Form to add new comment</h1>
-    <form action="/comments" method="post">
+    <h1>Edit Comment</h1>
+    <form action="/comments/<%= comment.id %>?_method=PATCH" method="post">
         <label for="username">Username: </label>
-        <input type="text" placeholder="username" name="username" id="username">
+        <input type="text" placeholder="username" name="username" id="username" value="<%= comment.username %>"
+            disabled>
         <br><br>
         <label for="comment">Comment:</label>
-        <textarea placeholder="comment" name="comment" id="comment"></textarea>
+        <textarea placeholder="comment" name="comment" id="comment"><%= comment.comment %></textarea>
         <br><br>
-        <button type="submit">Submit</button>
+        <button type="submit">Save</button>
         <br><br>
         <a href="/comments">Go Back</a>
     </form>
