@@ -22,6 +22,6 @@ app.get('/', async (req, res) => {
 
 })
 
-app.listen(5555, () => {
-    console.log('server is up and running at PORT', 5555);
+app.listen(8080, () => {
+    console.log('server is up and running at PORT', 8080);
 })
