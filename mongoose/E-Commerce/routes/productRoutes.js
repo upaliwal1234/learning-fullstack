@@ -13,7 +13,7 @@ router.get('/products', async (req, res) => {
 })
 
 // SHOW A NEW FORM
-router.get('/product/new', (req, res) => {
+router.get('/products/new', (req, res) => {
     res.render('product/new');
 })
 
@@ -27,7 +27,8 @@ router.post('/products', async (req, res) => {
 // TO SHOW A PARTICULAR PRODUCT
 router.get('/products/:id', async (req, res) => {
     let { id } = req.params;
-    let foundProduct = await Product.findById(id);
+    let foundProduct = await Product.findById(id).populate('reviews');
+    // res.send(foundProduct);
     res.render('product/show', { foundProduct })
 
 })

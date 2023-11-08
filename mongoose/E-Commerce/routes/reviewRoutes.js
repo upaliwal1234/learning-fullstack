@@ -7,14 +7,15 @@ const Review = require('../model/Review');
 router.post('/products/:id/review', async (req, res) => {
     let { id } = req.params;
     let { rating, comment } = req.body;
-    console.log(rating);
-    console.log(comment);
+    // console.log(rating);
+    // console.log(comment);
     let product = await Product.findById(id);
     let review = new Review({ rating, comment });
     product.reviews.push(review);
     await product.save();
     await review.save();
-    res.send('Review saved Successfully')
+    // res.send('Review saved Successfully')
+    res.redirect(`/products/${id}`)
 })
 
 module.exports = router;

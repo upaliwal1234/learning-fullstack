@@ -9,10 +9,10 @@ main {
   height: 200px;
   width: 100%;
 }
-
+/* 
 .product-card .btn {
   background-color: var(--main-color);
-}
+} */
 
 .product-card {
   height: 60vh;
