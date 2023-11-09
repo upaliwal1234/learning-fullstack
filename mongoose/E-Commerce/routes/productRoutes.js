@@ -13,19 +13,16 @@ router.get('/products', async (req, res) => {
     res.render('product/index', { products })
 })
 
-// SHOW A NEW FORM
 router.get('/products/new', (req, res) => {
     res.render('product/new');
 })
 
-// ACTUALLY ADDING IN THE DATABASE
 router.post('/products', async (req, res) => {
     let { name, image, price, description } = req.body;
     await Product.create({ name, image, price, description });
     res.redirect('/products');
 })
 
-// TO SHOW A PARTICULAR PRODUCT
 router.get('/products/:id', async (req, res) => {
     let { id } = req.params;
     let foundProduct = await Product.findById(id).populate('reviews');
@@ -34,16 +31,12 @@ router.get('/products/:id', async (req, res) => {
 
 })
 
-// FORM TO EDIT A PARTIICULAR PRODUCT
 router.get('/products/:id/edit', async (req, res) => {
     let { id } = req.params;
     let foundProduct = await Product.findById(id);
-    console.log('sam1', foundProduct, 'sam');
     res.render('product/edit', { foundProduct })
 })
 
-
-// TO ACTUALLY CHANGE IN db
 router.patch('/products/:id', async (req, res) => {
     let { id } = req.params;
     let { name, image, price, description } = req.body;
@@ -51,7 +44,6 @@ router.patch('/products/:id', async (req, res) => {
     res.redirect(`/products/${id}`);
 })
 
-// DELETE THE EXISTING PRODUCT
 router.delete('/products/:id', async (req, res) => {
     let { id } = req.params;
     let product = await Product.findById(id);
