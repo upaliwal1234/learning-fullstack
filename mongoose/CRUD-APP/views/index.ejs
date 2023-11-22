@@ -1,0 +1,28 @@
+<%- include('./partials/header') %>
+    <%- include('./partials/navbar') %>
+
+
+
+        <div>
+            <h1 style="text-align: center;">All Products</h1>
+            <div class="d-flex justify-content-center gap-4">
+                <% for(let product of products){%>
+                    <div class="card" style="width: 18rem;">
+                        <img src="<%= product.image %>" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%=product.name%>
+                            </h5>
+                            <p class="card-text">
+                                <%= product.description.substring(0, 50) %>...
+                            </p>
+                        </div>
+                        <div class="card-footer b-0" style="border: none; background:none">
+                            <a href="/products/<%= product._id %>" class="btn btn-primary">View</a>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+        </div>
+
+        <%- include('./partials/footer') %>
