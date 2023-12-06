@@ -1,4 +1,46 @@
 <%- include('../partials/header') %>
     <%- include('../partials/navbar') %>
-        <h1>Login</h1>
+        <div class="d-flex justify-content-center my-5">
+            <div class="my-5 d-flex flex-column align-items-center border-2" style="width: 30%;">
+                <h3 class="mt-1">LogIn</h3>
+                <form class="form-control-sm needs-validation" style="width: 100%;" action="/login" method="POST"
+                    novalidate>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid username.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <div class="invalid-feedback">
+                            Please enter a password.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">LogIn</button>
+                </form>
+            </div>
+        </div>
+        <script>
+            (() => {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                const forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })()
+        </script>
         <%- include('../partials/footer') %>

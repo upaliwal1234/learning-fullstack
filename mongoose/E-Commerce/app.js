@@ -11,6 +11,7 @@ const methodOverride = require('method-override')
 const authRoutes = require('./routes/authRoutes');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const session = require('express-session');
 
 mongoose.set('strictQuery', true); //version 7 ki vajah se
 
@@ -29,22 +30,28 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true })) //body parsing middleware
 app.use(methodOverride('_method'))//method override
 
+let configSession = {
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}
 
-// middleware for routers
-app.use(productRoutes);
-app.use(reviewRoutes);
-app.use(authRoutes);
+app.use(session(configSession));
 
 
 app.use(passport.initialize()); // initialize the passport
 app.use(passport.session());    // a storage where our id is stored
+// use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 passport.use(new LocalStrategy(User.authenticate()));
 
-// use static serialize and deserialize of model for passport session support
 
+// middleware for routers
+app.use(productRoutes);
+app.use(reviewRoutes);
+app.use(authRoutes);
 
 const PORT = 5500;
 app.listen(PORT, () => {
