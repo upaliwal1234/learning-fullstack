@@ -10,3 +10,9 @@
   - useEffect se kabhi jhoot nahi bolte.
   - dependency array[] : It should contain the states or props which are used inside the cb() function.
     - jo state dependency array me hote hai agar unme koi change aata hai to **useEffect** phir se chalta hai.
+
+# Routing
+
+- React creates a single page application.
+- Client Side Bundling.
+- Client Side Rendering.
