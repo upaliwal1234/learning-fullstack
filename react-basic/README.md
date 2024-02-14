@@ -16,3 +16,10 @@
 - React creates a single page application.
 - Client Side Bundling.
 - Client Side Rendering.
+- React Router Dom
+
+# Lazy Loading
+
+- Load the component only when it is required.
+
+# Prop Drilling
