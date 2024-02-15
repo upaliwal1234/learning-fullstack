@@ -27,7 +27,11 @@
 # useMemo()
 
 - It is a hook which is used to memoize the values.
+- useMemo(cb(), [dependency array])
+- cb(): This callback func. should not be async.
 
 # useCallback()
 
 - It is a hook which is used to memoize the functions.
+- useCallback(cb(), [dependency array])
+- cb(): This should not be async.
