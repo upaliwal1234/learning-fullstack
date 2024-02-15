@@ -23,3 +23,11 @@
 - Load the component only when it is required.
 
 # Prop Drilling
+
+# useMemo()
+
+- It is a hook which is used to memoize the values.
+
+# useCallback()
+
+- It is a hook which is used to memoize the functions.
