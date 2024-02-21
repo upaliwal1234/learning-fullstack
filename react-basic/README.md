@@ -35,3 +35,7 @@
 - It is a hook which is used to memoize the functions.
 - useCallback(cb(), [dependency array])
 - cb(): This should not be async.
+
+# memo()
+
+- memo lets you skip re-rendering a component when its props are unchanged.
